@@ -1,0 +1,9 @@
+{
+  "search.exclude": {
+    "coverage:": true,
+    "node_modules": true
+  },
+  "files.associations": {
+    ".env.defaults": "dotenv"
+  }
+}

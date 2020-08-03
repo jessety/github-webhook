@@ -1,0 +1,11 @@
+node_modules
+coverage
+.env
+
+RELEASE.md
+
+**/*.swp
+**/.DS_Store
+**/.Spotlight-V100
+**/[Tt]humbs.db
+**/[Dd]esktop.ini

@@ -1,0 +1,12 @@
+{
+  "apps": [{
+
+    "name": "github-webhook",
+
+    "cwd": "./",
+    "script": "src/index.js",
+
+    "watch": true,
+    "ignore_watch": [".git", "**/.DS_Store"]
+  }]
+}
