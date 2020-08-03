@@ -2,6 +2,8 @@
 
 A minimal GitHub webhook listener that executes a specified command when a release is published.
 
+[![ci](https://github.com/jessety/github-webhook/workflows/ci/badge.svg)](https://github.com/jessety/github-webhook/actions)
+
 ## Installation
 
 ```bash
