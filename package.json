@@ -1,6 +1,6 @@
 {
   "name": "@jessety/github-webhook",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "A simple GitHub webhook listener",
   "homepage": "https://github.com/jessety/github-webhook#readme",
