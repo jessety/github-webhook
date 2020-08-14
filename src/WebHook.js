@@ -22,7 +22,7 @@ class GitHubWebhook extends EventEmitter2 {
       throw new Error('GitHub WebHook requires a port to run on');
     }
 
-    if (typeof options.secret !== 'string') {
+    if (typeof options.secret !== 'string' || options.secret === '') {
       throw new Error('GitHub WebHook requires a "secret"');
     }
 
