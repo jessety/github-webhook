@@ -16,9 +16,11 @@ const webhook = new WebHook(options);
 
 webhook.on('error', error => console.error(error));
 
-// If verbose mode is enabled, print out every event we receive
+// If verbose mode is enabled, log out every event
 
 if (options.verbose === true) {
+
+  console.log(`Verbose mode enabled, logging all incoming events.`);
 
   webhook.onAny((event, payload) => {
 
@@ -27,7 +29,7 @@ if (options.verbose === true) {
   });
 }
 
-// When a release is published, execute the update script
+// When a release is published, execute the 'release' script
 
 webhook.on('release', payload => {
 
@@ -39,10 +41,41 @@ webhook.on('release', payload => {
 
   console.log(`\n\n${new Date().toLocaleString()} - ${repository.full_name} ${release.tag_name} ${action}`);
 
-  execute(options.script, repository.full_name);
+  if (options.script_release === '') {
+    return;
+  }
+
+  execute(options.script_release, repository.full_name, 'release', release.tag_name);
 });
 
-// Listen for incoming events
+// When a push event occurs on the default branch, execute the 'push' script
+
+webhook.on('push', payload => {
+
+  const branch = payload.ref.replace('refs/heads/', '');
+
+  const defaultBranchNames = ['main', 'master'];
+
+  if (options.default_branch !== '' && defaultBranchNames.includes(options.default_branch) === false) {
+    defaultBranchNames.push(options.default_branch);
+  }
+
+  if (defaultBranchNames.includes(branch) === false) {
+    return;
+  }
+
+  const { repository } = payload;
+
+  console.log(`\n\n${new Date().toLocaleString()} - ${repository.full_name} push ${branch}`);
+
+  if (options.script_push === '') {
+    return;
+  }
+
+  execute(options.script_push, repository.full_name, 'push', branch);
+});
+
+// Start listening for incoming events
 
 webhook.listen().then(() => {
 
